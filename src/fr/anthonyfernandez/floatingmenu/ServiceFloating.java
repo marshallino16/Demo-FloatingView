@@ -28,7 +28,7 @@ public class ServiceFloating extends Service {
 	    windowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
 
 	    chatHead = new ImageView(this);
-	    chatHead.setImageResource(R.drawable.floating);
+	    chatHead.setImageResource(R.drawable.floating2);
 
 	    final WindowManager.LayoutParams params = new WindowManager.LayoutParams(
 	        WindowManager.LayoutParams.WRAP_CONTENT,
@@ -57,18 +57,28 @@ public class ServiceFloating extends Service {
 	    	        initialY = paramsF.y;
 	    	        initialTouchX = event.getRawX();
 	    	        initialTouchY = event.getRawY();
-	    	        return true;
+	    	        return false;
 	    	      case MotionEvent.ACTION_UP:
-	    	        return true;
+	    	        return false;
 	    	      case MotionEvent.ACTION_MOVE:
 	    	    	  paramsF.x = initialX + (int) (event.getRawX() - initialTouchX);
 	    	    	  paramsF.y = initialY + (int) (event.getRawY() - initialTouchY);
 	    	        windowManager.updateViewLayout(chatHead, paramsF);
-	    	        return true;
+	    	        return false;
 	    	    }
 	    	    return false;
 	    	  }
 	    	});
+	    
+	    chatHead.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+				getApplicationContext().startActivity(intent);
+			}
+		});
 
 	  }
 
