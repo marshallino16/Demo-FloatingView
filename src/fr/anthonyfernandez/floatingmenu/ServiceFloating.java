@@ -1,10 +1,16 @@
 package fr.anthonyfernandez.floatingmenu;
 
+import java.util.ArrayList;
+
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.PixelFormat;
 import android.os.IBinder;
+import android.text.Layout;
+import android.util.Log;
+import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -12,8 +18,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListPopupWindow;
+import android.widget.ListView;
 import android.widget.PopupWindow;
 
 public class ServiceFloating extends Service {
@@ -23,6 +34,9 @@ public class ServiceFloating extends Service {
 	private PopupWindow pwindo;
 
 	private Boolean _enable = true;
+	
+	ArrayList<String> myArray;
+	ArrayList<PInfo> apps;
 
 	@Override
 	public IBinder onBind(Intent intent) {
@@ -33,6 +47,14 @@ public class ServiceFloating extends Service {
 	@Override 
 	public void onCreate() {
 		super.onCreate();
+		
+		RetrievePackages getInstalledPackages = new RetrievePackages(getApplicationContext());
+		apps = getInstalledPackages.getInstalledApps(false);
+		myArray = new ArrayList<String>();
+		
+		for(int i=0 ; i<apps.size() ; ++i) {
+			myArray.add(apps.get(i).appname);
+		}
 
 		windowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
 
@@ -83,7 +105,7 @@ public class ServiceFloating extends Service {
 
 			@Override
 			public void onClick(View arg0) {
-				initiatePopupWindow();
+				initiatePopupWindow(chatHead);
 				_enable = false;
 				//				Intent intent = new Intent(getApplicationContext(), MainActivity.class);
 				//				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
@@ -94,24 +116,35 @@ public class ServiceFloating extends Service {
 	}
 
 
-	private void initiatePopupWindow() {
+	private void initiatePopupWindow(View anchor) {
 		try {
-			LayoutInflater layoutInflater = (LayoutInflater)getBaseContext().getSystemService(LAYOUT_INFLATER_SERVICE);  
-			View popupView = layoutInflater.inflate(R.layout.popup, null);  
-			pwindo = new PopupWindow(popupView, LayoutParams.WRAP_CONTENT,  LayoutParams.WRAP_CONTENT);  
-			if(_enable == true) {
-				pwindo.showAsDropDown(chatHead, 50, -30);
-			} else {
-				pwindo.dismiss();
-			}
-			Button btnDismiss = (Button)popupView.findViewById(R.id.dismiss);
-			btnDismiss.setOnClickListener(new Button.OnClickListener(){
+			Display display = ((WindowManager) getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+			ListPopupWindow popup = new ListPopupWindow(this);
+	        popup.setAnchorView(anchor);
+	        popup.setWidth((int) (display.getWidth()/(1.5)));
+	        ArrayAdapter<String> arrayAdapter = 
+					new ArrayAdapter<String>(this,R.layout.list_item, myArray);
+	        popup.setAdapter(arrayAdapter);
+	        popup.setOnItemClickListener(new OnItemClickListener() {
 
 				@Override
-				public void onClick(View v) {
-					_enable = true;
-					pwindo.dismiss();
-				}});
+				public void onItemClick(AdapterView<?> arg0, View view, int position, long id3) {
+					//Log.w("tag", "package : "+apps.get(position).pname.toString());
+					Intent i;
+					PackageManager manager = getPackageManager();
+					try {
+					    i = manager.getLaunchIntentForPackage(apps.get(position).pname.toString());
+					    if (i == null)
+					        throw new PackageManager.NameNotFoundException();
+					    i.addCategory(Intent.CATEGORY_LAUNCHER);
+					    startActivity(i);
+					} catch (PackageManager.NameNotFoundException e) {
+
+					}
+				}
+			});
+	        popup.show();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
