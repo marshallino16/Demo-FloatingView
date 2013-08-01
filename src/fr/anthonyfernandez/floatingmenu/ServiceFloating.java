@@ -1,6 +1,7 @@
 package fr.anthonyfernandez.floatingmenu;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import android.app.Service;
 import android.content.Context;
@@ -26,7 +27,6 @@ import android.widget.ImageView;
 import android.widget.ListPopupWindow;
 import android.widget.ListView;
 import android.widget.PopupWindow;
-
 public class ServiceFloating extends Service {
 
 	private WindowManager windowManager;
@@ -34,9 +34,10 @@ public class ServiceFloating extends Service {
 	private PopupWindow pwindo;
 
 	private Boolean _enable = true;
-	
+
 	ArrayList<String> myArray;
 	ArrayList<PInfo> apps;
+	List listCity;
 
 	@Override
 	public IBinder onBind(Intent intent) {
@@ -47,13 +48,18 @@ public class ServiceFloating extends Service {
 	@Override 
 	public void onCreate() {
 		super.onCreate();
-		
+
 		RetrievePackages getInstalledPackages = new RetrievePackages(getApplicationContext());
 		apps = getInstalledPackages.getInstalledApps(false);
 		myArray = new ArrayList<String>();
-		
+
 		for(int i=0 ; i<apps.size() ; ++i) {
 			myArray.add(apps.get(i).appname);
+		}
+
+		listCity = new ArrayList();
+		for(int i=0 ; i<apps.size() ; ++i) {
+			listCity.add(apps.get(i));
 		}
 
 		windowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
@@ -120,12 +126,12 @@ public class ServiceFloating extends Service {
 		try {
 			Display display = ((WindowManager) getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
 			ListPopupWindow popup = new ListPopupWindow(this);
-	        popup.setAnchorView(anchor);
-	        popup.setWidth((int) (display.getWidth()/(1.5)));
-	        ArrayAdapter<String> arrayAdapter = 
-					new ArrayAdapter<String>(this,R.layout.list_item, myArray);
-	        popup.setAdapter(arrayAdapter);
-	        popup.setOnItemClickListener(new OnItemClickListener() {
+			popup.setAnchorView(anchor);
+			popup.setWidth((int) (display.getWidth()/(1.5)));
+			//ArrayAdapter<String> arrayAdapter = 
+			//new ArrayAdapter<String>(this,R.layout.list_item, myArray);
+			popup.setAdapter(new CustomAdapter(getApplicationContext(), R.layout.row, listCity));
+			popup.setOnItemClickListener(new OnItemClickListener() {
 
 				@Override
 				public void onItemClick(AdapterView<?> arg0, View view, int position, long id3) {
@@ -133,18 +139,18 @@ public class ServiceFloating extends Service {
 					Intent i;
 					PackageManager manager = getPackageManager();
 					try {
-					    i = manager.getLaunchIntentForPackage(apps.get(position).pname.toString());
-					    if (i == null)
-					        throw new PackageManager.NameNotFoundException();
-					    i.addCategory(Intent.CATEGORY_LAUNCHER);
-					    startActivity(i);
+						i = manager.getLaunchIntentForPackage(apps.get(position).pname.toString());
+						if (i == null)
+							throw new PackageManager.NameNotFoundException();
+						i.addCategory(Intent.CATEGORY_LAUNCHER);
+						startActivity(i);
 					} catch (PackageManager.NameNotFoundException e) {
 
 					}
 				}
 			});
-	        popup.show();
-			
+			popup.show();
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
