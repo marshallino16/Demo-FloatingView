@@ -1,4 +1,4 @@
-package fr.anthonyfernandez.floatingmenu;
+package fr.anthonyfernandez.floatingmenu.Manager;
 
 import android.graphics.drawable.Drawable;
 import android.util.Log;

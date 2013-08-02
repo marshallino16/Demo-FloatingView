@@ -1,7 +1,10 @@
-package fr.anthonyfernandez.floatingmenu;
+package fr.anthonyfernandez.floatingmenu.Manager;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import fr.anthonyfernandez.floatingmenu.R;
+import fr.anthonyfernandez.floatingmenu.R.id;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;

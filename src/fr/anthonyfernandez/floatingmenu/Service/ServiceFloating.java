@@ -1,15 +1,25 @@
-package fr.anthonyfernandez.floatingmenu;
+package fr.anthonyfernandez.floatingmenu.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.anthonyfernandez.floatingmenu.R;
+import fr.anthonyfernandez.floatingmenu.Activities.Configurations;
+import fr.anthonyfernandez.floatingmenu.Manager.CustomAdapter;
+import fr.anthonyfernandez.floatingmenu.Manager.PInfo;
+import fr.anthonyfernandez.floatingmenu.Manager.RetrievePackages;
+import fr.anthonyfernandez.floatingmenu.R.drawable;
+import fr.anthonyfernandez.floatingmenu.R.layout;
+
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Display;
 import android.view.GestureDetector;
@@ -53,6 +63,8 @@ public class ServiceFloating extends Service {
 	@Override 
 	public void onCreate() {
 		super.onCreate();
+		
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
 		RetrievePackages getInstalledPackages = new RetrievePackages(getApplicationContext());
 		apps = getInstalledPackages.getInstalledApps(false);
@@ -70,7 +82,18 @@ public class ServiceFloating extends Service {
 		windowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
 
 		chatHead = new ImageView(this);
+		
 		chatHead.setImageResource(R.drawable.floating2);
+		
+		if(prefs.getString("ICON", "floating2").equals("floating3")){
+			chatHead.setImageResource(R.drawable.floating3);
+		} else if(prefs.getString("ICON", "floating2").equals("floating4")){
+			chatHead.setImageResource(R.drawable.floating4);
+		} else if(prefs.getString("ICON", "floating2").equals("floating5")){
+			chatHead.setImageResource(R.drawable.floating5);
+		} else if(prefs.getString("ICON", "floating2").equals("floating5")){
+			chatHead.setImageResource(R.drawable.floating2);
+		}
 
 		final WindowManager.LayoutParams params = new WindowManager.LayoutParams(
 				WindowManager.LayoutParams.WRAP_CONTENT,

@@ -1,4 +1,4 @@
-package fr.anthonyfernandez.floatingmenu;
+package fr.anthonyfernandez.floatingmenu.Manager;
 
 import java.util.ArrayList;
 import java.util.List;

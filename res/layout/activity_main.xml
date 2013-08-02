@@ -15,7 +15,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="34dp"
+        android:layout_marginTop="100dp"
         android:text="Start Service" />
 
     <Button
@@ -25,7 +25,7 @@
         android:layout_alignLeft="@+id/button1"
         android:layout_alignRight="@+id/button1"
         android:layout_below="@+id/button1"
-        android:layout_marginTop="37dp"
+        android:layout_marginTop="10dp"
         android:text="Stop Service" />
 
     <ImageButton
@@ -33,7 +33,7 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_alignLeft="@+id/button2"
-        android:layout_centerVertical="true"
+        android:layout_alignParentBottom="true"
         android:scaleType="centerCrop"
         android:src="@drawable/github_logo" />
 
@@ -41,10 +41,20 @@
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="15dp"
+        android:layout_alignTop="@+id/imageView1"
+        android:layout_marginTop="26dp"
         android:layout_toRightOf="@+id/imageView1"
         android:text="Github Project"
         android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
+        android:id="@+id/button_config"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/button2"
+        android:layout_alignRight="@+id/button2"
+        android:layout_below="@+id/button2"
+        android:layout_marginTop="10dp"
+        android:text="Configuration" />
 
 </RelativeLayout>

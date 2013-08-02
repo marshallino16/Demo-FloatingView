@@ -1,5 +1,9 @@
-package fr.anthonyfernandez.floatingmenu;
+package fr.anthonyfernandez.floatingmenu.Activities;
 
+import fr.anthonyfernandez.floatingmenu.R;
+import fr.anthonyfernandez.floatingmenu.R.id;
+import fr.anthonyfernandez.floatingmenu.R.layout;
+import fr.anthonyfernandez.floatingmenu.Service.ServiceFloating;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Activity;
@@ -56,6 +60,17 @@ public class MainActivity extends Activity {
 				Intent i = new Intent(Intent.ACTION_VIEW);
 				i.setData(Uri.parse(url));
 				startActivity(i);
+			}
+		});
+		
+		Button config = (Button)findViewById(R.id.button_config);
+		config.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				Intent intent = new Intent(MainActivity.this, Configurations.class);
+				startActivity(intent);
+				stopService(new Intent(MainActivity.this, ServiceFloating.class));
 			}
 		});
 	}
