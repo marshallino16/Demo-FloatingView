@@ -8,31 +8,36 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.PixelFormat;
+import android.os.Bundle;
 import android.os.IBinder;
-import android.text.Layout;
 import android.util.Log;
 import android.view.Display;
+import android.view.GestureDetector;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
+import android.view.View.OnLongClickListener;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListPopupWindow;
-import android.widget.ListView;
 import android.widget.PopupWindow;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Intent;
+
 public class ServiceFloating extends Service {
+
+	public static  int ID_NOTIFICATION = 2018;
 
 	private WindowManager windowManager;
 	private ImageView chatHead;
 	private PopupWindow pwindo;
 
+	boolean mHasDoubleClicked = false;
+	long lastPressTime;
 	private Boolean _enable = true;
 
 	ArrayList<String> myArray;
@@ -80,32 +85,51 @@ public class ServiceFloating extends Service {
 
 		windowManager.addView(chatHead, params);
 
-		chatHead.setOnTouchListener(new View.OnTouchListener() {
-			private WindowManager.LayoutParams paramsF = params;
-			private int initialX;
-			private int initialY;
-			private float initialTouchX;
-			private float initialTouchY;
+		try {
+			chatHead.setOnTouchListener(new View.OnTouchListener() {
+				private WindowManager.LayoutParams paramsF = params;
+				private int initialX;
+				private int initialY;
+				private float initialTouchX;
+				private float initialTouchY;
 
-			@Override public boolean onTouch(View v, MotionEvent event) {
-				switch (event.getAction()) {
-				case MotionEvent.ACTION_DOWN:
-					initialX = paramsF.x;
-					initialY = paramsF.y;
-					initialTouchX = event.getRawX();
-					initialTouchY = event.getRawY();
-					break;
-				case MotionEvent.ACTION_UP:
-					break;
-				case MotionEvent.ACTION_MOVE:
-					paramsF.x = initialX + (int) (event.getRawX() - initialTouchX);
-					paramsF.y = initialY + (int) (event.getRawY() - initialTouchY);
-					windowManager.updateViewLayout(chatHead, paramsF);
-					break;
+				@Override public boolean onTouch(View v, MotionEvent event) {
+					switch (event.getAction()) {
+					case MotionEvent.ACTION_DOWN:
+
+						// Get current time in nano seconds.
+						long pressTime = System.currentTimeMillis();
+
+
+						// If double click...
+						if (pressTime - lastPressTime <= 300) {
+							createNotification();
+							ServiceFloating.this.stopSelf();
+							mHasDoubleClicked = true;
+						}
+						else {     // If not double click....
+							mHasDoubleClicked = false;
+						}
+						lastPressTime = pressTime; 
+						initialX = paramsF.x;
+						initialY = paramsF.y;
+						initialTouchX = event.getRawX();
+						initialTouchY = event.getRawY();
+						break;
+					case MotionEvent.ACTION_UP:
+						break;
+					case MotionEvent.ACTION_MOVE:
+						paramsF.x = initialX + (int) (event.getRawX() - initialTouchX);
+						paramsF.y = initialY + (int) (event.getRawY() - initialTouchY);
+						windowManager.updateViewLayout(chatHead, paramsF);
+						break;
+					}
+					return false;
 				}
-				return false;
-			}
-		});
+			});
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 
 		chatHead.setOnClickListener(new View.OnClickListener() {
 
@@ -154,6 +178,19 @@ public class ServiceFloating extends Service {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public void createNotification(){
+		Intent notificationIntent = new Intent(getApplicationContext(), ServiceFloating.class);
+		PendingIntent pendingIntent = PendingIntent.getService(getApplicationContext(), 0, notificationIntent, 0);
+
+		Notification notification = new Notification(R.drawable.floating2, "Click to start launcher",System.currentTimeMillis());
+		notification.setLatestEventInfo(getApplicationContext(), "Start launcher" ,  "Click to start launcher", pendingIntent);
+		notification.flags = Notification.FLAG_AUTO_CANCEL | Notification.FLAG_ONGOING_EVENT;
+
+		NotificationManager notificationManager = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
+
+		notificationManager.notify(ID_NOTIFICATION,notification);
 	}
 
 	@Override
