@@ -8,6 +8,8 @@ What can I do with that :
 
 - Get list of all your installed packages
 - Launch apps from the list
+- Change icon of launcher
+- Color and alpha picker to customise your icon
 
 You have to create a service (background running) with image View like this : 
 
