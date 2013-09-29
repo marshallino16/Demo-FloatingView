@@ -1,41 +1,62 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#2e85a6"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity" >
 
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="Hint  \nDouble tap on icon launcher to hide it \n Click the notification to restart launcher"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#eeecec"
+        android:textSize="14sp" />
+
     <Button
         android:id="@+id/button1"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="100dp"
-        android:text="Start Service" />
+        android:layout_marginTop="20dp"
+        android:layout_toEndOf="@id/textView2"
+        android:background="#34495e"
+        android:text="Start Service"
+        android:textColor="#FFF" />
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/button1"
         android:layout_alignRight="@+id/button1"
         android:layout_below="@+id/button1"
         android:layout_marginTop="10dp"
-        android:text="Stop Service" />
+        android:background="#34495e"
+        android:text="Stop Service"
+        android:textColor="#FFF" />
 
-    <ImageButton
-        android:id="@+id/imageView1"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_alignLeft="@+id/button2"
-        android:layout_alignParentBottom="true"
-        android:scaleType="centerCrop"
-        android:src="@drawable/github_logo" />
+    <Button
+        android:id="@+id/button_config"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="#34495e"
+        android:text="Configuration"
+        android:textColor="#FFF" />
+
+    <View
+        android:id="@+id/view1"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:background="#eeecec" />
 
     <TextView
         android:id="@+id/textView1"
@@ -45,16 +66,14 @@
         android:layout_marginTop="26dp"
         android:layout_toRightOf="@+id/imageView1"
         android:text="Github Project"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#eeecec" />
 
-    <Button
-        android:id="@+id/button_config"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button2"
-        android:layout_alignRight="@+id/button2"
-        android:layout_below="@+id/button2"
-        android:layout_marginTop="10dp"
-        android:text="Configuration" />
+    <ImageButton
+        android:id="@+id/imageView1"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/github_logo" />
 
-</RelativeLayout>
+</LinearLayout>

@@ -33,9 +33,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="20dp"
+                android:layout_weight="7"
                 android:gravity="center_vertical"
                 android:text="Icon of service"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <Button
+                android:id="@+id/restore"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_weight="1"
+                android:background="#34495e"
+                android:text="Restore"
+                android:textColor="#FFF" />
+
         </LinearLayout>
 
         <TextView
@@ -46,7 +59,13 @@
             android:gravity="center_vertical|center_horizontal"
             android:text="Choose new icon"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#FFF" />
+            android:textColor="#eeecec" />
+
+        <View
+            android:id="@+id/view1"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:background="#eeecec" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -83,14 +102,6 @@
                 android:src="@drawable/floating5" />
         </LinearLayout>
 
-        <Button
-            android:id="@+id/restore"
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Restore"
-            android:textColor="#FFF" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -101,12 +112,14 @@
                 android:id="@+id/picker"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center_horizontal"
                 android:layout_weight="0.5" />
 
             <com.larswerkman.colorpicker.OpacityBar
                 android:id="@+id/opacitybar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center_horizontal"
                 android:layout_weight="0.5" />
 
         </LinearLayout>
@@ -115,10 +128,11 @@
 
     <Button
         android:id="@+id/back_main"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:background="#34495e"
         android:text="Click and relaunch Service"
         android:textColor="#FFF" />
 

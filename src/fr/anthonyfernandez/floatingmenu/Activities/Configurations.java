@@ -1,17 +1,5 @@
 package fr.anthonyfernandez.floatingmenu.Activities;
 
-import com.larswerkman.colorpicker.ColorPicker;
-import com.larswerkman.colorpicker.ColorPicker.OnColorChangedListener;
-import com.larswerkman.colorpicker.OpacityBar;
-import com.larswerkman.colorpicker.SVBar;
-import com.larswerkman.colorpicker.SaturationBar;
-import com.larswerkman.colorpicker.ValueBar;
-
-import fr.anthonyfernandez.floatingmenu.R;
-import fr.anthonyfernandez.floatingmenu.R.layout;
-import fr.anthonyfernandez.floatingmenu.R.menu;
-import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -19,12 +7,20 @@ import android.content.SharedPreferences.Editor;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+
+import com.larswerkman.colorpicker.ColorPicker;
+import com.larswerkman.colorpicker.ColorPicker.OnColorChangedListener;
+import com.larswerkman.colorpicker.OpacityBar;
+
+import fr.anthonyfernandez.floatingmenu.R;
 
 public class Configurations extends Activity {
 
@@ -52,7 +48,6 @@ public class Configurations extends Activity {
 		 */
 		final ColorPicker picker = (ColorPicker) findViewById(R.id.picker);
 		OpacityBar opacityBar = (OpacityBar) findViewById(R.id.opacitybar);
-
 		picker.addOpacityBar(opacityBar);
 
 		//To get the color
@@ -63,7 +58,6 @@ public class Configurations extends Activity {
 		// adds listener to the colorpicker which is implemented
 		//in the activity
 		picker.setOnColorChangedListener(new OnColorChangedListener() {
-
 			@Override
 			public void onColorChanged(int color) {
 				Drawable mDrawable = icon.getDrawable(); 
@@ -80,61 +74,41 @@ public class Configurations extends Activity {
 
 		ImageButton image1 = (ImageButton)findViewById(R.id.imageButton1);
 		image1.setOnClickListener(new OnClickListener() {
-
 			@Override
 			public void onClick(View v) {
-				SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(Configurations.this);
-				Editor editor = prefs.edit();
-				editor.putString("ICON", "floating3");
-				editor.commit();
-
+				
+				setPreferences("floating3");
 				icon.setImageResource(R.drawable.floating3);
 			}
 		});
 		ImageButton image2 = (ImageButton)findViewById(R.id.imageButton2);
 		image2.setOnClickListener(new OnClickListener() {
-
 			@Override
 			public void onClick(View v) {
-				SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(Configurations.this);
-				Editor editor = prefs.edit();
-				editor.putString("ICON", "floating4");
-				editor.commit();
-
+				setPreferences("floating4");
 				icon.setImageResource(R.drawable.floating4);
 			}
 		});
 		ImageButton image3 = (ImageButton)findViewById(R.id.imageButton3);
 		image3.setOnClickListener(new OnClickListener() {
-
 			@Override
 			public void onClick(View v) {
-				SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(Configurations.this);
-				Editor editor = prefs.edit();
-				editor.putString("ICON", "floating5");
-				editor.commit();
-
+				setPreferences("floating5");
 				icon.setImageResource(R.drawable.floating5);
 			}
 		});
 
 		Button restore = (Button)findViewById(R.id.restore);
 		restore.setOnClickListener(new OnClickListener() {
-
 			@Override
 			public void onClick(View v) {
-				SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(Configurations.this);
-				Editor editor = prefs.edit();
-				editor.putString("ICON", "floating2");
-				editor.commit();
-
+				setPreferences("floating2");
 				icon.setImageResource(R.drawable.floating2);
 			}
 		});
 
 		Button backHome = (Button)findViewById(R.id.back_main);
 		backHome.setOnClickListener(new OnClickListener() {
-
 			@Override
 			public void onClick(View v) {
 				Intent intentMain = new Intent(Configurations.this, MainActivity.class);
@@ -150,4 +124,11 @@ public class Configurations extends Activity {
 		return true;
 	}
 
+	private void setPreferences(String myIconPref)
+	{
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(Configurations.this);
+		Editor editor = prefs.edit();
+		editor.putString("ICON", myIconPref);
+		editor.commit();
+	}
 }

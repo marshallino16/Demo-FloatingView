@@ -3,40 +3,31 @@ package fr.anthonyfernandez.floatingmenu.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.anthonyfernandez.floatingmenu.R;
-import fr.anthonyfernandez.floatingmenu.Activities.Configurations;
-import fr.anthonyfernandez.floatingmenu.Manager.CustomAdapter;
-import fr.anthonyfernandez.floatingmenu.Manager.PInfo;
-import fr.anthonyfernandez.floatingmenu.Manager.RetrievePackages;
-import fr.anthonyfernandez.floatingmenu.R.drawable;
-import fr.anthonyfernandez.floatingmenu.R.layout;
-
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.PixelFormat;
-import android.os.Bundle;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.Display;
-import android.view.GestureDetector;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnLongClickListener;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 import android.widget.ListPopupWindow;
 import android.widget.PopupWindow;
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Intent;
+import fr.anthonyfernandez.floatingmenu.R;
+import fr.anthonyfernandez.floatingmenu.Adapter.CustomAdapter;
+import fr.anthonyfernandez.floatingmenu.Manager.PInfo;
+import fr.anthonyfernandez.floatingmenu.Manager.RetrievePackages;
 
 public class ServiceFloating extends Service {
 
