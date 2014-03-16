@@ -1,0 +1,139 @@
+<RelativeLayout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#2e85a6"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".Configurations" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#eeeeee" >
+
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/floating2" />
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="7"
+                android:gravity="center_vertical"
+                android:text="Icon of service"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <Button
+                android:id="@+id/restore"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_weight="1"
+                android:background="#34495e"
+                android:text="Restore"
+                android:textColor="#FFF" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="Choose new icon"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#eeecec" />
+
+        <View
+            android:id="@+id/view1"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:background="#eeecec" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp" >
+
+            <ImageButton
+                android:id="@+id/imageButton1"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginRight="1dp"
+                android:layout_weight="0.3"
+                android:background="#f4f4f4"
+                android:scaleType="centerInside"
+                android:src="@drawable/floating3" />
+
+            <ImageButton
+                android:id="@+id/imageButton2"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginRight="1dp"
+                android:layout_weight="0.3"
+                android:background="#f4f4f4"
+                android:scaleType="centerInside"
+                android:src="@drawable/floating4" />
+
+            <ImageButton
+                android:id="@+id/imageButton3"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_weight="0.3"
+                android:background="#f4f4f4"
+                android:scaleType="centerInside"
+                android:src="@drawable/floating5" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="40dp"
+            android:orientation="horizontal" >
+
+            <com.larswerkman.holocolorpicker.ColorPicker
+                android:id="@+id/picker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:layout_weight="0.5" />
+
+            <com.larswerkman.holocolorpicker.OpacityBar
+                android:id="@+id/opacitybar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:layout_weight="0.5" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/back_main"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="#34495e"
+        android:text="Click and relaunch Service"
+        android:textColor="#FFF" />
+
+</RelativeLayout>
