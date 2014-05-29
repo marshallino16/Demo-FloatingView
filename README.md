@@ -45,9 +45,14 @@ If you wanna have a floating window, you can use PopupWindow :
 			pwindo.showAsDropDown(chatHead, 50, -30);
 ```
 
+![Floating1](http://185.14.185.122/github/float1.png)
+![Floating1](http://185.14.185.122/github/float3.png)
+![Floating2](http://185.14.185.122/github/float2.png)
+
+```
 This work is under the MIT License (MIT)
 
-Copyright (c) [2013] [Fernandez]
+Copyright (c) 2013 Fernandez
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -65,8 +70,4 @@ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-
-![Floating1](http://185.14.185.122/github/float1.png)
-![Floating1](http://185.14.185.122/github/float3.png)
-![Floating2](http://185.14.185.122/github/float2.png)
+SOFTWARE.```
