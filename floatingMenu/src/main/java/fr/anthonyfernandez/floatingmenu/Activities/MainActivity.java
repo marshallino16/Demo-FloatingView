@@ -21,6 +21,8 @@ import android.widget.ImageView;
 import android.widget.PopupWindow;
 
 public class MainActivity extends Activity {
+	
+	public static int OVERLAY_PERMISSION_REQ_CODE = 1234;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +75,28 @@ public class MainActivity extends Activity {
 				stopService(new Intent(MainActivity.this, ServiceFloating.class));
 			}
 		});
+	checkPermission();	
+		
+	}
+	
+	
+	public void checkPermission() {
+		if (!Settings.canDrawOverlays(MainActivity.this)) {
+			Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+					Uri.parse("package:" + getPackageName()));
+			startActivityForResult(intent, OVERLAY_PERMISSION_REQ_CODE);
+		}
+
+	}
+
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (requestCode == OVERLAY_PERMISSION_REQ_CODE) {
+			if (!Settings.canDrawOverlays(this)) {
+				// SYSTEM_ALERT_WINDOW permission not granted...
+			}
+		}
 	}
 
 	@Override
