@@ -1,9 +1,5 @@
 package fr.anthonyfernandez.floatingmenu.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
@@ -14,6 +10,7 @@ import android.content.pm.PackageManager;
 import android.graphics.PixelFormat;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
+import android.support.v4.app.NotificationCompat;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -24,10 +21,14 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 import android.widget.ListPopupWindow;
 import android.widget.PopupWindow;
-import fr.anthonyfernandez.floatingmenu.R;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import fr.anthonyfernandez.floatingmenu.Adapter.CustomAdapter;
 import fr.anthonyfernandez.floatingmenu.Manager.PInfo;
 import fr.anthonyfernandez.floatingmenu.Manager.RetrievePackages;
+import fr.anthonyfernandez.floatingmenu.R;
 
 public class ServiceFloating extends Service {
 
@@ -198,13 +199,15 @@ public class ServiceFloating extends Service {
 		Intent notificationIntent = new Intent(getApplicationContext(), ServiceFloating.class);
 		PendingIntent pendingIntent = PendingIntent.getService(getApplicationContext(), 0, notificationIntent, 0);
 
-		Notification notification = new Notification(R.drawable.floating2, "Click to start launcher",System.currentTimeMillis());
-		notification.setLatestEventInfo(getApplicationContext(), "Start launcher" ,  "Click to start launcher", pendingIntent);
-		notification.flags = Notification.FLAG_AUTO_CANCEL | Notification.FLAG_ONGOING_EVENT;
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
+                .setContentIntent(pendingIntent)
+                .setSmallIcon(R.drawable.floating2).setTicker("Click to start launcher").setWhen(System.currentTimeMillis())
+                .setContentTitle("Start launcher")
+                .setContentText("Click to start launcher");
 
 		NotificationManager notificationManager = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
-
-		notificationManager.notify(ID_NOTIFICATION,notification);
+		notificationManager.notify(ID_NOTIFICATION, builder.build());
 	}
 
 	@Override
