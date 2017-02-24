@@ -1,24 +1,18 @@
 package fr.anthonyfernandez.floatingmenu.Activities;
 
-import fr.anthonyfernandez.floatingmenu.R;
-import fr.anthonyfernandez.floatingmenu.R.id;
-import fr.anthonyfernandez.floatingmenu.R.layout;
-import fr.anthonyfernandez.floatingmenu.Service.ServiceFloating;
-import android.net.Uri;
-import android.os.Bundle;
 import android.app.Activity;
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Intent;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.Menu;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Bundle;
+import android.provider.Settings;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.PopupWindow;
+
+import fr.anthonyfernandez.floatingmenu.R;
+import fr.anthonyfernandez.floatingmenu.Service.ServiceFloating;
 
 public class MainActivity extends Activity {
 	
@@ -81,22 +75,23 @@ public class MainActivity extends Activity {
 	
 	
 	public void checkPermission() {
-		if (!Settings.canDrawOverlays(MainActivity.this)) {
-			Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
-					Uri.parse("package:" + getPackageName()));
-			startActivityForResult(intent, OVERLAY_PERMISSION_REQ_CODE);
-		}
-
+        if(Build.VERSION.SDK_INT >= 23) {
+            if (!Settings.canDrawOverlays(MainActivity.this)) {
+                Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                        Uri.parse("package:" + getPackageName()));
+                startActivityForResult(intent, OVERLAY_PERMISSION_REQ_CODE);
+            }
+        }
 	}
 
 
 	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (requestCode == OVERLAY_PERMISSION_REQ_CODE) {
-			if (!Settings.canDrawOverlays(this)) {
-				// SYSTEM_ALERT_WINDOW permission not granted...
-			}
-		}
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == OVERLAY_PERMISSION_REQ_CODE) {
+            if (!Settings.canDrawOverlays(this)) {
+                // SYSTEM_ALERT_WINDOW permission not granted...
+            }
+        }
 	}
 
 	@Override

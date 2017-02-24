@@ -43,7 +43,7 @@ public class SlideLaunch extends FragmentActivity {
             editor.commit();
             setContentView(R.layout.activity_launch);
 
-    		// Création de la liste de Fragments que fera défiler le PagerAdapter
+    		// Creation de la liste de Fragments que fera defiler le PagerAdapter
     		List fragments = new Vector();
 
     		// Ajout des Fragments dans la liste
@@ -51,7 +51,7 @@ public class SlideLaunch extends FragmentActivity {
     		fragments.add(Fragment.instantiate(this,SpanTwo.class.getName()));
     		fragments.add(Fragment.instantiate(this,SpanThree.class.getName()));
 
-    		// Création de l'adapter qui s'occupera de l'affichage de la liste de
+    		// Creation de l'adapter qui s'occupera de l'affichage de la liste de
     		// Fragments
     		this.mPagerAdapter = new InitPagerAdapter(super.getSupportFragmentManager(), fragments);
 

@@ -11,7 +11,7 @@ public class InitPagerAdapter extends FragmentPagerAdapter {
 	
 	private final List fragments;
 
-	//On fournit à l'adapter la liste des fragments à afficher
+	//On fournit l'adapter la liste des fragments afficher
 	public InitPagerAdapter(FragmentManager fm, List fragments) {
 		super(fm);
 		this.fragments = fragments;
