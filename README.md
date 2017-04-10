@@ -1,12 +1,14 @@
-FloatingView [(Application Demo on Play Store)] (https://play.google.com/store/apps/details?id=fr.anthonyfernandez.floatingmenu)
-====================
+#FloatingView [(Application Demo on Play Store)](https://play.google.com/store/apps/details?id=fr.anthonyfernandez.floatingmenu)
+--------------------
 
 DEPRECATED SEE [FloatingView](https://github.com/recruit-lifestyle/FloatingView)
 
-====================
+--------------------
 
 Floating View for Android app - Facebook ChatHeads Notification system
 This is a demo of how works Facebook ChatHeads. 
+
+## Details
 
 Basiclay all you need to do is to create a service (background running) with image View like this : 
 
@@ -42,10 +44,12 @@ If you wanna have a floating window, you can use PopupWindow :
 			pwindo.showAsDropDown(chatHead, 50, -30);
 ```
 
+## Screenshots
+
 ![Floating1](http://185.14.185.122/github/float3.png)
 ![Floating2](http://185.14.185.122/github/float2.png)
 
-```
-This work is under the MIT License (MIT)
 
-Copyright (c) 2013 Fernandez```
+## License
+
+This work is under the MIT License (MIT)
