@@ -1,4 +1,4 @@
-#FloatingView [(Application Demo on Play Store)](https://play.google.com/store/apps/details?id=fr.anthonyfernandez.floatingmenu)
+FloatingView [(Application Demo on Play Store)](https://play.google.com/store/apps/details?id=fr.anthonyfernandez.floatingmenu)
 --------------------
 
 DEPRECATED SEE [FloatingView](https://github.com/recruit-lifestyle/FloatingView)
